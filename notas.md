@@ -12,3 +12,9 @@ Created PostCSS config file: postcss.config.js
 
 # REACT ROUTER DOM: $ npm i react-router-dom
 > Permite simular el enrutado desde el frontend
+
+# REACT HOOK FORM: $ npm install react-hook-form
+> Permite mediante react manejar el cambio de estado de un formulario, así como validarlo
+
+# AXIOS: $ npm i axios
+> Axios es un cliente HTTP basado en promesasnode.js para el navegador. Es isomorfo (= puede ejecutarse en el navegador y nodejs con la misma base de código). En el lado del *servidor usa el httpmódulo* nativo node.js, mientras que en el *cliente (navegador) usa XMLHttpRequests*.

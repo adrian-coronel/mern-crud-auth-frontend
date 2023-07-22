@@ -1,8 +1,8 @@
 // CONTEXT: Es una forma de crear un almacenamiento global o compartido que puede ser accesible por todos los componentes que están "suscritos" a ese contexto.
 
 import { createContext, useState, useContext, useEffect } from "react";
-import { registerRequest, loginRequest } from "../api/auth.js";
-
+import { registerRequest, loginRequest, verifyTokenRequest } from "../api/auth.js";
+import Cookies from "js-cookie";
 
 export const AuthContext = createContext();
 
@@ -27,6 +27,8 @@ export const AuthProvider = ({children}) => {
   const [user, setUser] = useState(null) //Devuelve un valor con estado y una función para actualizarlo.
   const [isAuthenticated, setAuthenticated] = useState(false); // Permitirá saber si un usuario ya esta authenticado
   const[errors, setErrors] = useState([]); // Utilizaremos para capturar los errores
+  const [loading, setLoading] = useState(true) // Utilizaremos determinar si la solicitud carga
+
 
   const signup = async (user) => {
     try {
@@ -49,12 +51,14 @@ export const AuthProvider = ({children}) => {
     try {
       const res = await loginRequest(user);
       console.log(res);
+      setUser(res.data);
+      setAuthenticated(true);
     } catch (error) {
       setErrors(error.response.data); 
     }
   }
 
-  
+  // MOSTRAR ERRORES 5 SEGUNDOS
   useEffect(() => {
     // Si hay almenos 1 error, espera 5 segundos antes de limpiar los errores
     if (errors.length > 0) {
@@ -67,6 +71,46 @@ export const AuthProvider = ({children}) => {
     }
   },[errors]) // El efecto se dispara dependiendo de como cambié errors
 
+  // Cuando se carge la pagina
+  useEffect(() => {
+    async function checkLogin() {
+      const cookies = Cookies.get();
+
+      // Si no se encontro el token
+      if (!cookies.token) {
+        setAuthenticated(false)
+        setLoading(false)
+        return setUser(null)
+      }
+
+      // En caso exista el token
+      try {
+        // enviamos el token para que se verifique en el backend
+        const res = await verifyTokenRequest(cookies.token)
+        
+        // Si no se recibe una respuesta
+        if (!res.data) {
+          setAuthenticated(false)
+          setLoading(false)
+          return;
+        }
+
+        // Si se recibe una respuesta(user)
+        setAuthenticated(true)
+        setUser(res.data)
+        setLoading(false)
+      } catch (error) {
+        // Si axios recibío un error
+        setAuthenticated(false)
+        setUser(null)
+        setLoading(false)
+      }
+    }
+    // EJECUTAMOS LA FUNCION ASINCRONA
+    checkLogin()
+  },[])  
+
+
   return (
     <AuthContext.Provider value={{
       // Todos los componentes hijos podrán llamar a signup y user
@@ -75,6 +119,7 @@ export const AuthProvider = ({children}) => {
       isAuthenticated,
       errors,
       signin,
+      loading
     }}
     >
       {children}

@@ -20,3 +20,6 @@ Created PostCSS config file: postcss.config.js
 > Axios es un cliente HTTP basado en promesasnode.js para el navegador. Es isomorfo (= puede ejecutarse en el navegador y nodejs con la misma base de código). En el lado del *servidor usa el httpmódulo* nativo node.js, mientras que en el *cliente (navegador) usa XMLHttpRequests*.
 
 # CONTEXT: Es una forma de crear un almacenamiento global o compartido que puede ser accesible por todos los componentes que están "suscritos" a ese contexto.
+
+# JS COOKIE: $ npm i js-cookie
+> Nos permitirá leer las cookies desde el frontend

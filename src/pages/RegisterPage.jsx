@@ -13,7 +13,7 @@ function RegisterPage() {
   // REDIRECCIONAR A '/tasks'
   useEffect(() => {
     if (isAuthenticated) navigate('/tasks');
-  },[isAuthenticated]);
+  },[isAuthenticated]); // Si isAuthenticated sufre un cambio, se redireccionará
 
   {/* handleSubmit: procesa los datos del formulario y realiza la lógica necesaria al enviar el formulario. */}
   const onSubmit = handleSubmit(async (data) => {

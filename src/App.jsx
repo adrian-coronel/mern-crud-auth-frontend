@@ -8,13 +8,14 @@ import TaskFormPage from "./pages/TaskFormPage.jsx"
 import ProfilePage from "./pages/ProfilePage.jsx"
 import HomePage from "./pages/HomePage.jsx"
 import ProtectedRoute from "./ProtectedRoute.jsx"
-
+import { TaskProvider } from "./context/TasksContext.jsx"
 
 function App() {
   return (
     // Las rutas dentro de AuthProvider, podrán acceder a sus valores globables
     <AuthProvider>
-      {/* Define todas las rutas de la aplicaciones */}
+      <TaskProvider>
+        {/* Define todas las rutas de la aplicaciones */}
       <BrowserRouter> 
         {/* Define que las rutas utilizando el componente Route */}
         <Routes>
@@ -32,6 +33,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      </TaskProvider>
     </AuthProvider>
   )
 }

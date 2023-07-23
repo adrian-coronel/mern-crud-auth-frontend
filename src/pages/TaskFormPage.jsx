@@ -1,17 +1,41 @@
 import { useForm } from "react-hook-form"
 import { useTasks } from "../context/TasksContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 function TaskFormPage() {
 
-  const { register, handleSubmit } = useForm();
-  const { createTask} = useTasks();
+  const { 
+    register, // Devuelve tres propiedades (name,value,onchage)
+    handleSubmit, 
+    setValue, // Permite establecer un valor en a los registrados con register() HOOK FORM
+  } = useForm();
+  const { createTask, getTask, updateTask } = useTasks();
   const navigate = useNavigate();
+  const params = useParams(); // Permite obtener un objeto con los datos dinamicos que van en la URL
+
+  useEffect(() => {
+    async function loadTask() {
+      // Si en la URL se encuentra un :ID
+      if ( params.id ) {
+        const task = await getTask(params.id)
+        
+        // Establecemos los valores en los inputs
+        setValue('title', task.title)
+        setValue('description', task.description)
+      }
+    }
+
+    loadTask();
+  },[])
 
   const onSubmit = handleSubmit((data) => {
-    createTask(data);
-    navigate('/tasks')
+    if (  params.id ) 
+      updateTask(params.id, data)
+    else 
+      createTask(data);
 
+    navigate('/tasks')  
   })
 
   return ( 

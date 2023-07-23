@@ -24,6 +24,13 @@ function Navbar() {
               </Link>
             </li>
             <li>
+              <Link to="/tasks"
+                className='bg-indigo-500 px-4 py-1 rounded-sm'
+              >
+                All Tasks
+              </Link>
+            </li>
+            <li>
               <Link to="/" onClick={() => {
                 logout()
               }}>

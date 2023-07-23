@@ -18,24 +18,25 @@ function App() {
       <TaskProvider>
         {/* Define todas las rutas de la aplicaciones */}
       <BrowserRouter> 
+        <main className="container mx-auto px-10">
+          <Navbar />        
 
-        <Navbar />        
+          {/* Define que las rutas utilizando el componente Route */}
+          <Routes>
+            <Route path="/" element={ <HomePage/> } />
+            {/* Pasamos la pagina LoginPage como elemento en la ruta /login */}
+            <Route path="/login" element={ <LoginPage/> } />
+            <Route path="/register" element={ <RegisterPage/> } />
 
-        {/* Define que las rutas utilizando el componente Route */}
-        <Routes>
-          <Route path="/" element={ <HomePage/> } />
-          {/* Pasamos la pagina LoginPage como elemento en la ruta /login */}
-          <Route path="/login" element={ <LoginPage/> } />
-          <Route path="/register" element={ <RegisterPage/> } />
-
-          {/* ProtectedRoute: verificará si el usuario esta authentificado */}
-          <Route element={ <ProtectedRoute/> }>
-            <Route path="/tasks" element={ <TasksPage/> } />
-            <Route path="/add-task" element={ <TaskFormPage/> } />
-            <Route path="/tasks/:id" element={ <TaskFormPage/> } />
-            <Route path="/profile" element={ <ProfilePage/> } />
-          </Route>
-        </Routes>
+            {/* ProtectedRoute: verificará si el usuario esta authentificado */}
+            <Route element={ <ProtectedRoute/> }>
+              <Route path="/tasks" element={ <TasksPage/> } />
+              <Route path="/add-task" element={ <TaskFormPage/> } />
+              <Route path="/tasks/:id" element={ <TaskFormPage/> } />
+              <Route path="/profile" element={ <ProfilePage/> } />
+            </Route>
+          </Routes>  
+        </main>    
       </BrowserRouter>
       </TaskProvider>
     </AuthProvider>

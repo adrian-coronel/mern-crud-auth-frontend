@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage.jsx"
 import HomePage from "./pages/HomePage.jsx"
 import ProtectedRoute from "./ProtectedRoute.jsx"
 import { TaskProvider } from "./context/TasksContext.jsx"
+import Navbar from './components/Navbar.jsx'
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
       <TaskProvider>
         {/* Define todas las rutas de la aplicaciones */}
       <BrowserRouter> 
+
+        <Navbar />        
+
         {/* Define que las rutas utilizando el componente Route */}
         <Routes>
           <Route path="/" element={ <HomePage/> } />

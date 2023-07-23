@@ -58,6 +58,13 @@ export const AuthProvider = ({children}) => {
     }
   }
 
+  const logout = () => {
+    // Removemos el token de las cookies
+    Cookies.remove('token');
+    setAuthenticated(false)
+    setUser(null)
+  }
+
   // MOSTRAR ERRORES 5 SEGUNDOS
   useEffect(() => {
     // Si hay almenos 1 error, espera 5 segundos antes de limpiar los errores
@@ -119,7 +126,9 @@ export const AuthProvider = ({children}) => {
       isAuthenticated,
       errors,
       signin,
-      loading
+      loading,
+      logout,
+
     }}
     >
       {children}

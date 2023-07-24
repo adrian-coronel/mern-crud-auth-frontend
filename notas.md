@@ -23,3 +23,6 @@ Created PostCSS config file: postcss.config.js
 
 # JS COOKIE: $ npm i js-cookie
 > Nos permitirá leer las cookies desde el frontend
+
+# DAYJS: $ npm i dayjs
+> Day.js es una biblioteca de JavaScript minimalista que analiza, valida, manipula y muestra fechas y horas para navegadores modernos con una API en gran medida compatible con Moment.js.

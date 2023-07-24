@@ -1,13 +1,19 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useTasks } from '../context/TasksContext'
 
 function Navbar() {
 
   const {isAuthenticated, logout, user } = useAuth()
+  const {setTasks} = useTasks()
 
   return (
     <nav className="bg-zinc-700 my-3 flex justify-between py-4 px-10 rounded-lg">
-      <h1 className="text-2xl font-bold"><Link to="/">Tasks Manager</Link></h1>
+      <Link to={
+        isAuthenticated ? '/tasks' : '/'
+      }>
+        <h1 className="text-2xl font-bold">Tasks Manager</h1>
+      </Link>
       <ul className="flex gap-x-2">
         { isAuthenticated ? 
           (
@@ -33,6 +39,7 @@ function Navbar() {
             <li>
               <Link to="/" onClick={() => {
                 logout()
+                setTasks([]) // Limpio los tasks al hacer logout
               }}>
                 Logout
               </Link>

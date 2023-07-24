@@ -36,8 +36,9 @@ function LoginPage() {
           ))
         }
 
-        <h1 className="text-2xl font-bold">Login</h1>
+        <h1 className="text-3xl font-bold mb-3">Login</h1>
         <form onSubmit={ onSubmit }>  
+
           {/* hook useForm puede hacer seguimiento de los valores, validaciones, etc */}
           <input 
             type="email" 
@@ -63,7 +64,10 @@ function LoginPage() {
             )
           }
 
-          <button type="submit">
+          <button 
+            className="bg-sky-500 text-white px-4 py-2 rounded-md my-2"
+            type="submit"
+          >
             Login
           </button>
         </form>

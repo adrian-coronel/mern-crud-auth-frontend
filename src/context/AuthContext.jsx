@@ -4,6 +4,7 @@ import { createContext, useState, useContext, useEffect } from "react";
 import { registerRequest, loginRequest, verifyTokenRequest } from "../api/auth.js";
 import Cookies from "js-cookie";
 
+
 export const AuthContext = createContext();
 
 
@@ -28,7 +29,6 @@ export const AuthProvider = ({children}) => {
   const [isAuthenticated, setAuthenticated] = useState(false); // Permitirá saber si un usuario ya esta authenticado
   const[errors, setErrors] = useState([]); // Utilizaremos para capturar los errores
   const [loading, setLoading] = useState(true) // Utilizaremos determinar si la solicitud carga
-
 
   const signup = async (user) => {
     try {
@@ -61,8 +61,10 @@ export const AuthProvider = ({children}) => {
   const logout = () => {
     // Removemos el token de las cookies
     Cookies.remove('token');
+
     setAuthenticated(false)
     setUser(null)
+    
   }
 
   // MOSTRAR ERRORES 5 SEGUNDOS

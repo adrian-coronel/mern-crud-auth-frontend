@@ -22,7 +22,7 @@ function RegisterPage() {
 
   return (
     <div className="flex h-[calc(100vh-100px)] items-center justify-center">
-
+      
       <div className="bg-zinc-800 max-w-md w-full p-10 rounded-md">
         {
           registerErrors.map((error, i) => (
@@ -31,6 +31,8 @@ function RegisterPage() {
             </div>
           ))
         }
+
+        <h1 className="text-3xl font-bold mb-3">Register</h1>
         <form onSubmit={ onSubmit }>
             
             {/* hook useForm puede hacer seguimiento de los valores, validaciones, etc */}
@@ -70,7 +72,10 @@ function RegisterPage() {
               )
             }
 
-            <button type="submit">
+            <button 
+              className="bg-sky-500 text-white px-4 py-2 rounded-md my-2"
+              type="submit"
+            >
               Register
             </button>
         </form>

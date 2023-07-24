@@ -16,30 +16,33 @@ function TaskCard({ task }) {
 
         <h1 className="text-2xl font-bold">{task.title}</h1>
           
-        <p className="text-slate-300">{task.description}</p>
+        <p className="text-slate-300 mt-3">{task.description}</p>
+
+      </div>
+
+      <div className="flex justify-between items-center mt-4">
+        <div className="flex gap-x-2">
+          <Link 
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md" 
+            to={`/tasks/${task._id}`}
+          >
+            edit
+          </Link>
+
+          <button 
+            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md" 
+            onClick={() => {
+              deleteTask(task._id)
+            }}
+          >
+            delete
+          </button>
+        </div>
 
         {/* Utilizamos el formato UTC para mostrar nuestra fecha */}
         <p>
           {dayjs(task.date).utc().format('DD/MM/YYYY')}  
         </p>
-      </div>
-
-      <div className="flex gap-x-2 mt-4">
-        <Link 
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md" 
-          to={`/tasks/${task._id}`}
-        >
-          edit
-        </Link>
-
-        <button 
-          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md" 
-          onClick={() => {
-            deleteTask(task._id)
-          }}
-        >
-          delete
-        </button>
       </div>
     </div>
   )
